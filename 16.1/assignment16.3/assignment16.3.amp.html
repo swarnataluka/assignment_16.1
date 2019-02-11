@@ -1,0 +1,107 @@
+<!doctype html>
+<html ?>
+<head>
+	<meta charset="utf-8">
+	<title>amp-access</title>
+	<script async src="https://cdn.ampproject.org/v0.js"></script>
+<!-- Import the `amp-access, amp-analytics`and amp-mustache components in the header. -->
+	<script async custom-element="amp-access" src="https://cdn.ampproject.org/v0/amp-access-0.1.js"></script>
+	<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+	<script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+	<link rel="canonical" href="http://localhost:8889/assignment16.3/assignment16.3.amp.html">
+	<style amp-custom>
+	.h {
+        background: teal;
+        color: white;
+        font-size: 2em;
+        text-align: center;
+      }
+	.marl{
+			margin-left: 60px;
+	  }	 
+	.pgen {
+			margin-left: 60px;
+			font-family: arial;
+			font-weight: bold;
+			font-size: 1em;
+		}			
+	.p01{
+			color: teal;
+			
+		}	 
+			
+	.p02{
+			color: tomato;
+		}	 
+	.p03{
+			color: brown;
+		}	 
+	</style>
+<!-- Add the configuration for the `authorization`, `pingback` and the `login` endpoints. Please provide two login endpoints, one as sign-in and the other as sign-out.-->
+	<script id="amp-access" type="application/json">
+    {
+        "authorization": "https://ampbyexample.com/samples_templates/comment_section/authorization?rid=READER_ID&url=CANONICAL_URL&ref=DOCUMENT_REFERRER&_=RANDOM",
+        "noPingback": "true",
+        "login": {
+          "sign-in": "https://ampbyexample.com/samples_templates/comment_section/login?rid=READER_ID",
+          "sign-out": "https://ampbyexample.com/samples_templates/comment_section/logout?rid=READER_ID"
+        },
+        "authorizationFallbackResponse": {
+            "error": true,
+			"loggedIn": false
+        }
+    }
+	</script>
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+	<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+	<noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+	</noscript>
+</head>
+<body>
+<!-- This section is visible to all users -->
+  <section>
+	<h3 class="h">The Article</h3>
+	<amp-img class="marl" src="./img/m1.png" width="200" height="100" alt="Image visible to all users"></amp-img>
+	<br>    
+    <p class="pgen p03">
+      This is a brief introduction of the article and is visible to all users.
+    </p>
+  </section>
+
+<!-- Use the `amp-access` attribute to control the visibility of each component. The expression must evaluate to a boolean value. If it evaluates to `TRUE`, the section will be shown.  -->
+  <section amp-access="loggedIn">
+	<amp-img class="marl" src="./img/m2.png" width="200" height="100" alt="Image visible to loggedin users"></amp-img>
+	<br>
+	<p class="pgen p01">This section is visible to users if the authorization response contains: <code>"loggedIn": true</code>. This is usually the main content of the article.</p>
+  </section>
+<!-- This section is only shown if the value of the `access` attribute on the response for the authorization requests evaluates to `FALSE`-->
+  <section amp-access="NOT loggedIn">
+	<amp-img class="marl" src="./img/m3.png" width="200" height="100" alt="Image visible to not loggedin users"></amp-img>
+	<br>
+	<p class="pgen p02">This section is only visible to users if the authorization response does not contain <code>loggedIn</code> or contains <code>"loggedIn": false</code>.</p>
+  </section>  
+<!-- Use `on="tap:amp-access.login-sign-in"` to open the login dialog when the element is clicked. amp-access-hide` will default the component to be hidden and enabled later if the `amp-access` expression is evaluated to `TRUE` -->
+  <section class="pgen p01" amp-access="NOT loggedIn" amp-access-hide role="button" tabindex="0">
+	<br><br>
+    <a class="ampstart-btn caps" on="tap:amp-access.login-sign-in"><button>Login</button></a>
+  </section>
+<!-- The logout link will only be shown for logged in subscribers. We use a trick here: the logout is a login action that directly redirects back to the original URL. This has the advantage that the page updates without being reloaded.  -->
+  <section class="pgen p01"amp-access="loggedIn" amp-access-hide role="button" tabindex="0">
+  <br><br>
+    <a class="ampstart-btn caps" on="tap:amp-access.login-sign-out"><button>Logout</button></a>
+  </section>
+  <!-- Combine `amp-access` and `amp-mustache` to show information returned from the authorization request. In this case we show the user name returned in the authentification response. -->
+  <section amp-access="loggedIn" class="marl">
+	<br>
+    <template amp-access-template type="amp-mustache">
+      Congratulations!, you have successfully logged in.
+    </template>
+  </section>
+  <section amp-access="NOT loggedIn" class="marl">
+	<br>
+    <template amp-access-template type="amp-mustache">
+      Please login, so that the main article content can be read.
+    </template>
+  </section>
+</body>
+</html>

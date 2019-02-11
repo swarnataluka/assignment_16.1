@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="/css/style.css">
+<script type="text/javascript" src="/js/validate.js"></script>
+<meta http-equiv="refresh" content="0; URL=./index.html"/>
+</head>
+<body>
+<div class="container">
+<div class="main">
+<h3>Login</h3>
+<br>
+<form id="form_id" method="post" name="redirect" action="submit">
+<label>Email:</label>
+<input type="text" name="email" id="emailname" value="charlie@gmail.com" required autofocus size="50" minlength="3" maxlength="64">
+<label>Password:</label>
+<input type="password" name="passwrd" id="passwrd" value="password1234" required autocomplete="current-password" minlength="9" maxlength="12">
+<input type="submit" value="Login" id="submit" onclick="validate()">
+</div>
+</div>
+</form>
+</body>
+</html>

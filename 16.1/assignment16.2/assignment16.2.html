@@ -1,0 +1,34 @@
+<!-- Requirements for markup of AMP html file: 1. must start with !DOCTYPE html -->
+<!DOCTYPE html>
+<!-- 2. must contain a top-level <html amp> tag -->
+<html amp lang="en">
+<!-- 3. must contain <head> and <body> tags -->
+<head>
+<!-- 4. must contain a <meta charset="UTF-8"> tag as the first child of their <head> tag-->
+    <meta charset="UTF-8">
+<!-- 5. must contain a <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0"> tag-->
+    <meta name="viewport" content="width=device-width, minimum-scale=1,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- 6. must contain a <script async src="https://cdn.ampproject.org/v0.js> </script> tag that points to the regular HTML version of the AMP HTML document or to itself if no such HTML version exists -->
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+<!-- 7. must contain the following in the <head> tag -->
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /* any custom style goes here */
+        body{
+            background-color:white;
+        }
+        amp-img{
+            background-color:gray;
+            border: 1px solid black;
+            }
+    </style>
+    <link rel="canonical" href="http://localhost:8889/assignment/assignment16.2.html">
+    <title>assignment 16.2</title>
+</head>
+<body>
+    <header>This is the assignment16.2.html AMP page</header>
+<!-- In AMP HTML <amp-img> tag replaces the <img> tag of regular HTML -->
+    <amp-img src="welcome.jpg" width="75" height="42" layout="responsive"></amp-img>
+</body>
+</html>

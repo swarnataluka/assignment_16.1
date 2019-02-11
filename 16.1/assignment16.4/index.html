@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>index</title>
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/viewModel.js"></script>
+	<script type="text/javascript" src="/js/knockout-3.3.0.js"></script>
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+</head>
+<body>
+<!-- This section is visible to all users -->
+  <section>
+	<h3 class="h">The Article</h3>
+	<img class="marl" src="/img/m1.png" width="200" height="100" alt="Image visible to all users">
+	<br>    
+    <p class="pgen p03">
+      This is a brief introduction of the article and is visible to all users.
+    </p>
+  </section>
+  <section data-bind="visible: status">
+	<img class="marl" src="/img/m2.png" width="200" height="100" alt="Image visible to login status: 'Active' users" />
+	<br>
+	<p class="pgen p01">This section is visible to users if the authorization response contains login <code>"status": true</code>. This is usually the main content of the article.</p>
+  </section>
+	<section data-bind="visible: !(status)">
+	<img class="marl" src="/img/m3.png" width="200" height="100" alt="Image visible to not login status users" />
+	<br>
+	<p class="pgen p02">This section is only visible to users if the authorization response does not contain login <code>"!(status)"</code> or contains <code>"status": false</code>.</p>
+  </section>
+  <section class="pgen" role="button" tabindex="0" data-bind="visible: status">
+  <br><br>
+    <a href="/"><button>Logout</button></a>
+  </section>
+  <section class="marl" data-bind="visible: status">
+	<br>
+      Congratulations!, you have successfully logged in.
+  </section>
+  <section class="pgen" role="button" tabindex="0" data-bind="visible: !(status)">
+	<br><br>
+    <a href="/public/login.html" target="_self"><button>Login</button></a>
+  </section>
+  
+  <section class="marl" data-bind="visible: !(status)">
+	<br>
+      Please login, so that the main article content can be read.
+  </section> 
+<script type="text/javascript">
+viewModel(login);
+var viewModel = new viewModel(login);
+ko.applyBindings(viewModel);
+</script>
+</body>
+</html>
